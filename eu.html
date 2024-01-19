@@ -1,0 +1,579 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amrikhudo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <style>
+    .preloader {
+      /*фиксированное позиционирование*/
+      position: fixed;
+      /* координаты положения */
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      /* фоновый цвет элемента */
+      background: #212529;
+      /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
+      z-index: 1001;
+    }
+    
+    .preloader__row {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      width: 70px;
+      height: 70px;
+      margin-top: -35px;
+      margin-left: -35px;
+      text-align: center;
+      animation: preloader-rotate 2s infinite linear;
+    }
+    
+    .preloader__item {
+      position: absolute;
+      display: inline-block;
+      top: 0;
+      background-color: #97DFFC;
+      border-radius: 100%;
+      width: 35px;
+      height: 35px;
+      animation: preloader-bounce 2s infinite ease-in-out;
+    }
+    
+    .preloader__item:last-child {
+      top: auto;
+      bottom: 0;
+      animation-delay: -1s;
+    }
+    
+    @keyframes preloader-rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    @keyframes preloader-bounce {
+    
+      0%,
+      100% {
+        transform: scale(0);
+      }
+    
+      50% {
+        transform: scale(1);
+      }
+    }
+    
+    .loaded_hiding .preloader {
+      transition: 0.3s opacity;
+      opacity: 0;
+    }
+    
+    .loaded .preloader {
+      display: none;
+    }
+    
+    
+    
+    
+  </style>
+  <style>
+    :root {
+      --bg-1: #212529;
+      --bg-2: #343A40;
+      --bg-3: #495057;
+      --bg-4: #6C757D;
+    
+      --primary: #613DC1;
+      --secondary: #97DFFC;
+      --success: #28A745;
+      --info: #17A2B8;
+      --warning: #FFC107;
+      --danger: #DC3545;
+    
+      --hero-margin: 0;
+    }
+    
+    
+    @keyframes move_wave {
+      0% {
+        transform: translateX(0) translateZ(0) scaleY(1);
+      }
+      50% {
+        transform: translateX(-25%) translateZ(0) scaleY(0.55);
+      }
+      100% {
+        transform: translateX(-50%) translateZ(0) scaleY(1);
+      }
+    }
+    
+    @media (max-width: 1300px) {
+      :root {
+          --hero-margin: 0;
+      }
+    }
+    
+    @media (max-width: 1999px) {
+      :root {
+          --hero-margin: 5rem;
+      }
+    }
+    
+    @media (max-width: 850px) {
+      :root {
+          --hero-margin: 10rem;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      :root {
+          --hero-margin: 17rem;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      :root {
+          --hero-margin: 23rem;
+      }
+    }
+    
+    
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: white;
+      background-color: var(--bg-3);
+    }
+    
+    #sleep-svg {
+      width: 100%;
+      position: absolute;
+      margin-top: var(--hero-margin);
+      left: 0;
+      top: 25rem;
+      z-index: -1;
+      animation: up 2s ease forwards;
+      display: none;
+    
+      stroke-dasharray: 1000;
+    }
+    
+    #school-svg {
+      width: 100%;
+      position: absolute;
+      margin-top: var(--hero-margin);
+      left: 0;
+      top: 25rem;
+      z-index: -1;
+      animation: up 2s ease forwards;
+      display: none;
+    }
+    
+    #home-svg {
+      width: 100%;
+      position: absolute;
+      margin-top: var(--hero-margin);
+      left: 0;
+      top: 25rem;
+      z-index: -1;
+      animation: up 2s ease forwards;
+      display: none;
+    }
+    
+    #test {
+      stroke-dasharray: 1000;
+    }
+    
+    @keyframes up {
+      0% {
+          transform: translateY(0);
+      }
+    
+      100% {
+          transform: translateY(-25rem);
+      }
+    }
+    
+    #devide-block {
+      margin-top: var(--hero-margin);
+      z-index: 1;
+    }
+    
+    #content {
+      width: 100vw;
+    
+    
+      max-width: 90vw;
+      margin-inline: 5vw;
+      padding-bottom: 5rem;
+    }
+    
+    #hero {
+      margin-left: 4rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+    @media (max-width: 500px) {
+      #hero {
+          margin-left: 0;
+          margin-inline: 10%;
+    
+      }
+    }
+    
+    #separator {
+      margin-bottom: 0;
+    }
+    
+    #hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+    
+    #hero h1 span {
+      margin-top: 0px;
+      color: #17A2B8;
+    }
+    
+    #hero ul {
+      font-size: 1.5rem;
+      margin-top: 0;
+    }
+    
+    #mainsection {
+      background-color: var(--bg-1);
+      margin-top: -10px;
+    }
+    
+    #status {
+      margin-top: 0;
+      font-size: 1.8rem;
+    }
+    
+    #status span {
+      color: var(--secondary);
+    }
+    
+    
+    #techcontainer {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    #techcontainer .tech {
+      padding: 1rem;
+      background-color: var(--bg-2);
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      width: 230px;
+      transition: 0.2s;
+      height: 280px;
+      overflow: auto;
+    
+      display: block;
+      flex-direction: column;
+      justify-content: center;
+      flex-grow: 1;
+    }
+    
+    
+    #techcontainer .tech:hover {
+      background-color: var(--bg-3);
+      transition: 0.2s;
+    
+      display: block;
+    }
+    
+    @media (min-width: 600px) {
+      #techcontainer .tech {
+          height: 200px;
+          display: flex;
+      }
+    
+      #techcontainer .tech .contents {
+          display: none;
+      }
+    
+      #techcontainer .tech:hover .contents {
+          display: block;
+          transition: 0.2s;
+      }
+    
+      #techcontainer .tech:hover .title {
+          display: none;
+          transition: 0.2s;
+      }
+    }
+    
+    #techcontainer .tech .contents .project {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+      color: var(--secondary);
+      display: block;
+    }
+    
+    #techcontainer .tech .contents p {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    
+    
+    #content a {
+      color: var(--secondary);
+      text-decoration: none;
+    }
+    
+    
+    #serversrow {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    #serversrow div {
+      background-color: var(--bg-2);
+      width: 280px;
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 0.5rem;
+      flex-grow: 1;
+    }
+    
+    #serversrow div h2 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+    
+    #serversrow div p {
+      font-weight: 400;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+    
+    
+    #qwiktech {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    #qwiktech div {
+      background-color: var(--bg-2);
+      min-width: 100px;
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 0.5rem;
+      flex-grow: 1;
+    
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    
+    #footer {
+      text-align: center!important;
+      margin-bottom: 1rem!important;
+      margin-top: 1rem!important;
+    }
+    
+    .footer-top { background: #333; text-align: left; left: 20px; color: #aaa;}
+    .footer-top h1, h2, h3 { padding: 30px 0;}
+    .footer-top h3 { padding-bottom: 10px; color: #fff;}
+    
+    .footer-about p a { border: 0; }
+    .footer-about p a:hover, .footer-about p a:focus { border: 0; }
+    
+    .footer-contact p { word-wrap: break-word; }
+    .footer-contact i { padding-right: 10px; font-size: 18px; color: #666; }
+    .footer-contact p a { border: 0; }
+    .footer-contact p a:hover, .footer-contact p a:focus { border: 0; }
+    
+    .footer-links a { color: #aaa; border: 0; }
+    .footer-links a:hover, .footer-links a:focus { color: #fff; }
+    
+    .footer-bottom { padding: 15px 0 17px 0; background: #444; text-align: left; color: #aaa; }
+    
+    .footer-social { padding-top: 3px; text-align: right; right: 20px; }
+    .footer-social a { margin-left: 20px; color: #777; border: 0; }
+    .footer-social a:hover, .footer-social a:focus { color: rgb(0, 132, 255); border: 0; }
+    .footer-social i { font-size: 24px; vertical-align: middle; }
+    
+    .footer-copyright { padding-top: 5px; }
+    .footer-copyright a { color: #fff; border: 0; }
+    .footer-copyright a:hover, .footer-copyright a:focus { color: #aaa; border: 0; }
+    
+    
+    
+    #translate-link {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 30px;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: #17A2B8;
+    }
+  </style>
+
+    <a href="index.html" id="translate-link">RU</a>
+
+    <div class="preloader">
+        <div class="preloader__row">
+          <div class="preloader__item"></div>
+          <div class="preloader__item"></div>
+        </div>
+      </div>
+
+
+    <script>
+        window.onload = function () {
+          document.body.classList.add("loaded");
+        };
+      </script>
+      <script>
+        window.onload = function () {
+          document.body.classList.add("loaded_hiding");
+          window.setTimeout(function () {
+            document.body.classList.add("loaded");
+            document.body.classList.remove("loaded_hiding");
+          }, 500);
+        };
+      </script>
+<div id="hero">
+<h1>Hi, I'm <span>Amrikhudo</span>.</h1>
+</div>
+<div id="separator">
+<svg viewBox="0 0 681 254" fill="none" xmlns="http://www.w3.org/2000/svg" id="school-svg">
+<g clip-path="url(#clip0_3_12)">
+<path d="M464.015 135.221L426.296 138.267L422.041 82.801L459.105 100.731C459.78 101.063 460.575 101.223 461.403 101.162C463.901 100.954 465.763 98.7167 465.566 96.1468C465.435 94.4315 464.414 93.006 463.007 92.3097L462.982 92.2992L377.068 50.7362L376.806 47.3179C377.852 47.3332 378.951 47.5684 379.971 47.4861C379.995 47.4841 380.031 47.4812 380.061 47.4787C382.928 47.2472 385.666 46.6086 388.226 45.6169L388.019 45.6897C389.938 45.1421 392.154 44.7389 394.447 44.5537C396.813 44.3626 399.143 44.4175 401.417 44.6887L401.191 44.6696C401.429 44.6939 401.697 44.7035 401.975 44.681C403.085 44.5914 404.067 44.0884 404.78 43.3268L404.774 43.3334C405.68 42.3942 406.198 41.0812 406.096 39.6689L404.761 22.2556C404.592 20.0572 402.96 18.3322 400.92 18.0172L400.889 18.0135C398.307 17.5303 395.374 17.3622 392.38 17.6039C389.363 17.8476 386.467 18.4865 383.742 19.4667L383.973 19.3919C382.267 19.9472 380.294 20.3433 378.242 20.509C376.848 20.6216 375.475 20.6203 374.125 20.5174L374.278 20.5238C373.42 18.998 371.792 18.0453 369.994 18.1905C367.507 18.3913 365.65 20.6224 365.846 23.1737C365.846 23.1799 365.847 23.1923 365.848 23.1985L368.016 51.4672L289.503 106.308C288.196 107.236 287.399 108.809 287.531 110.524C287.728 113.088 289.915 115.005 292.413 114.803C293.24 114.736 293.995 114.445 294.635 113.994L294.611 114.008L328.49 90.3432L332.745 145.809L295.025 148.855C292.527 149.057 290.659 151.302 290.855 153.865L294.655 203.405C294.852 205.969 297.039 207.886 299.538 207.684L468.52 194.038C471.019 193.836 472.887 191.592 472.69 189.028L468.891 139.488C468.694 136.924 466.507 135.007 464.008 135.209L464.015 135.221ZM386.932 28.2002C388.692 27.5472 390.733 27.0832 392.863 26.9112C393.968 26.822 395.06 26.8148 396.134 26.8776L396.012 26.875L396.648 35.1667C395.676 35.1642 394.556 35.2048 393.422 35.2965C390.47 35.5348 387.616 36.0893 384.893 36.926L385.155 36.855C383.362 37.5481 381.28 38.034 379.101 38.21C378.051 38.2948 377.02 38.3033 375.995 38.249L376.117 38.2516L375.489 30.0589C376.401 30.0725 377.46 30.0306 378.528 29.9443C381.54 29.7011 384.437 29.0808 387.175 28.1245L386.932 28.2002ZM300.271 157.79L333.464 155.11L336.551 195.361L303.358 198.042L300.271 157.79ZM342.161 149.735L337.143 84.317L373.166 59.1576L412.582 78.2312L421.043 188.544L405.956 189.763L403.462 157.252C403.265 154.688 401.078 152.772 398.579 152.973L362.369 155.897C359.87 156.099 358.002 158.344 358.199 160.907L360.692 193.418L345.605 194.636L342.161 149.735ZM369.744 192.681L367.607 164.814L394.765 162.621L396.902 190.488L369.744 192.681ZM463.288 185.127L430.095 187.807L427.008 147.556L460.201 144.875L463.288 185.127ZM378.811 132.755C391.31 131.746 400.645 120.531 399.662 107.706C398.678 94.8813 387.748 85.3024 375.249 86.3117C362.75 87.3211 353.415 98.5365 354.398 111.361C355.394 124.179 366.318 133.752 378.811 132.755ZM375.961 95.6005C383.463 94.9947 390.019 100.74 390.609 108.437C391.199 116.134 385.6 122.861 378.099 123.467C370.597 124.072 364.041 118.327 363.451 110.63C362.873 102.938 368.467 96.2182 375.961 95.6005Z" fill="#212529" />
+<path d="M593.084 120.054C592.608 115.799 590.883 111.794 588.138 108.568C585.393 105.343 581.757 103.05 577.712 101.994C576.691 97.7617 574.239 94.0386 570.792 91.4881C567.345 88.9376 563.128 87.7255 558.892 88.0676C554.655 88.4097 550.675 90.2838 547.66 93.3561C544.644 96.4284 542.79 100.499 542.426 104.844C538.591 106.535 535.348 109.383 533.128 113.009C530.907 116.636 529.814 120.869 529.993 125.148C526.224 127.074 523.222 130.279 521.495 134.219C519.768 138.159 519.424 142.591 520.521 146.761C521.617 150.932 524.087 154.584 527.511 157.098C530.935 159.612 535.101 160.833 539.302 160.552L560.005 158.88L561.356 176.495L548.481 177.534C547.343 177.626 546.287 178.178 545.545 179.069C544.804 179.96 544.438 181.117 544.527 182.284C544.617 183.452 545.155 184.536 546.023 185.297C546.891 186.058 548.018 186.433 549.157 186.341L583.49 183.569C584.628 183.477 585.684 182.925 586.425 182.034C587.167 181.143 587.533 179.987 587.444 178.819C587.354 177.651 586.816 176.567 585.948 175.806C585.08 175.046 583.952 174.67 582.814 174.762L569.939 175.801L568.588 158.187L589.287 156.516C593.479 156.119 597.408 154.244 600.406 151.212C603.404 148.179 605.287 144.175 605.734 139.88C606.182 135.585 605.166 131.263 602.86 127.649C600.554 124.034 597.1 121.351 593.084 120.054ZM588.611 147.709L567.913 149.38L567.377 142.396L578.08 129.538C578.798 128.644 579.145 127.497 579.047 126.343C578.949 125.189 578.413 124.121 577.554 123.369C576.696 122.617 575.584 122.24 574.458 122.321C573.332 122.402 572.282 122.933 571.534 123.801L566.422 129.943L565.548 118.555C565.459 117.387 564.921 116.304 564.053 115.543C563.184 114.782 562.057 114.406 560.919 114.498C559.781 114.59 558.725 115.142 557.983 116.033C557.242 116.924 556.876 118.081 556.965 119.248L557.839 130.636L551.853 125.39C550.982 124.654 549.864 124.297 548.739 124.398C547.615 124.499 546.574 125.049 545.841 125.93C545.108 126.811 544.741 127.951 544.82 129.107C544.899 130.262 545.417 131.34 546.262 132.107L558.794 143.089L559.329 150.073L538.627 151.745C536.245 151.88 533.9 151.1 532.049 149.557C530.197 148.014 528.973 145.818 528.614 143.399C528.255 140.979 528.788 138.509 530.108 136.471C531.429 134.433 533.442 132.973 535.755 132.375C536.306 132.243 536.827 132 537.287 131.661C537.748 131.322 538.138 130.893 538.436 130.399C538.735 129.905 538.935 129.355 539.026 128.782C539.116 128.208 539.096 127.621 538.965 127.056C538.585 125.503 538.509 123.888 538.742 122.304C538.975 120.721 539.512 119.201 540.323 117.832C541.134 116.464 542.202 115.275 543.465 114.334C544.727 113.393 546.16 112.719 547.679 112.351C548.688 112.117 549.581 111.518 550.195 110.664C550.809 109.81 551.103 108.757 551.023 107.699C551.014 107.584 551.002 107.434 550.969 107.286C550.871 106.028 551.014 104.762 551.392 103.561C551.77 102.36 552.375 101.247 553.172 100.286C554.782 98.3443 557.078 97.1386 559.555 96.9339C562.031 96.7293 564.485 97.5424 566.377 99.1944C568.269 100.846 569.444 103.202 569.644 105.743C569.65 105.822 569.656 105.901 569.66 105.959C569.689 107.06 570.116 108.11 570.86 108.904C571.604 109.698 572.611 110.179 573.682 110.251C575.239 110.37 576.758 110.806 578.15 111.534C579.542 112.261 580.779 113.266 581.789 114.488C582.799 115.711 583.562 117.128 584.034 118.656C584.505 120.184 584.675 121.793 584.535 123.389C584.452 124.557 584.825 125.712 585.572 126.598C586.318 127.484 587.378 128.029 588.516 128.114C590.893 128.334 593.105 129.455 594.719 131.259C596.334 133.062 597.235 135.418 597.247 137.867C597.259 140.316 596.381 142.681 594.784 144.501C593.187 146.321 590.986 147.465 588.611 147.709Z" fill="#212529" />
+</g>
+</svg>
+<svg viewBox="0 0 681 254" fill="none" xmlns="http://www.w3.org/2000/svg" id="sleep-svg">
+<g clip-path="url(#clip0_2_2)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M295.231 44.3134L347.423 40.2058L366.948 92.4119L284.204 98.924L295.231 44.3134ZM331.413 105.391L338.038 189.574L358.239 187.984C361.026 187.764 363.464 189.847 363.684 192.634C363.903 195.42 361.821 197.859 359.034 198.078L308.537 202.052C305.75 202.271 303.312 200.189 303.093 197.402C302.873 194.615 304.956 192.177 307.743 191.958L327.944 190.368L321.319 106.186L331.413 105.391Z" fill="#212529" id="test" />
+<path d="M447.077 27.4133L455.903 139.567M495.105 80.0573L407.875 86.9225M399.827 143.98L511.98 135.153M499.518 136.134L412.288 142.999L403.952 37.0766C403.822 35.4241 404.354 33.7877 405.43 32.5272C406.507 31.2668 408.04 30.4856 409.692 30.3555L484.461 24.4711C486.113 24.3411 487.75 24.8728 489.01 25.9493C490.271 27.0258 491.052 28.559 491.182 30.2115L499.518 136.134Z" stroke="#212529" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M67.4724 178.4L69.6808 206.461L82.1427 205.48L83.1243 217.952L89.3551 217.461L88.3735 204.99L250.373 192.24L251.355 204.712L257.585 204.221L256.604 191.75L269.066 190.769L266.857 162.708L67.4724 178.4ZM262.344 185.023L75.4208 199.735L74.1939 184.145L261.117 169.434L262.344 185.023Z" fill="#212529" />
+<path d="M84.6393 167.504L213.149 157.39L212.679 151.419L84.1694 161.533C77.8007 162.035 73.0551 167.977 73.5905 174.781L79.5557 174.312C79.2797 170.8 81.5605 167.746 84.6393 167.504Z" fill="#212529" />
+<path d="M222.292 160.451L222.458 162.563L217.224 162.975L217.058 160.863C216.516 153.981 221.671 147.942 228.546 147.401L246.224 146.01C253.099 145.469 259.135 150.627 259.677 157.509L259.843 159.621L254.609 160.033L254.443 157.921C254.128 153.928 250.628 150.934 246.637 151.248L228.959 152.64C225.135 152.941 222.231 156.17 222.27 159.952L222.252 159.953L222.292 160.451Z" fill="#212529" stroke="#212529" />
+</g>
+</svg>
+<svg viewBox="0 0 681 254" fill="none" xmlns="http://www.w3.org/2000/svg" id="home-svg">
+<g clip-path="url(#clip0_6_2)">
+<path d="M254.025 187.006C252.142 188.107 249.73 187.471 248.639 185.587C247.538 183.704 248.174 181.292 250.058 180.202C254.614 177.545 259.181 175.29 263.748 173.437C268.346 171.572 273.006 170.104 277.73 169.033C280.133 168.484 282.545 168.05 284.965 167.712L284.658 163.817L272.414 156.118C271.949 155.594 271.594 154.986 271.363 154.337L253.06 155.778L253.058 155.757C249.122 156.066 245.44 154.757 242.67 152.391C239.899 150.025 238.03 146.593 237.72 142.657L237.699 142.658L236.344 125.44L232.66 125.73L232.659 125.708C231.312 125.814 230.037 125.364 229.094 124.549C228.152 123.744 227.52 122.576 227.404 121.24L227.382 121.231L227.393 121.23L227.076 117.21C226.969 115.852 227.421 114.588 228.236 113.645C229.041 112.703 230.209 112.071 231.545 111.955L231.554 111.944L249.12 110.561L249.121 110.572C250.479 110.465 251.743 110.916 252.685 111.721L252.686 111.731C253.628 112.536 254.26 113.704 254.376 115.04L254.388 115.06L254.378 115.061L254.694 119.082C254.801 120.439 254.351 121.714 253.545 122.646C252.74 123.588 251.572 124.22 250.235 124.325L250.216 124.348L245.522 124.717L246.876 141.925L246.855 141.927C246.963 143.295 247.641 144.513 248.641 145.377C249.64 146.23 250.949 146.709 252.327 146.601L252.326 146.58L255.336 146.343L254.682 138.039C254.405 134.513 257.283 131.385 261.061 131.087L311.612 127.109C315.401 126.811 318.722 129.451 319 132.977L319.653 141.281L322.663 141.044L322.665 141.065C324.033 140.957 325.261 140.278 326.114 139.279C326.968 138.28 327.446 136.961 327.339 135.593L327.318 135.595L325.963 118.386L322.953 118.623L322.951 118.602C321.604 118.708 320.34 118.257 319.387 117.443C318.444 116.638 317.812 115.47 317.697 114.134L317.684 114.114L317.695 114.113L317.379 110.092C317.272 108.735 317.733 107.47 318.538 106.527C319.343 105.585 320.511 104.953 321.847 104.837L321.867 104.825L339.433 103.443L339.434 103.453C340.792 103.346 342.056 103.798 342.998 104.602L342.999 104.613C343.941 105.418 344.573 106.586 344.689 107.922L344.701 107.942L344.691 107.943L345.007 111.963C345.113 113.31 344.663 114.585 343.847 115.528C343.042 116.47 341.874 117.102 340.538 117.208L340.529 117.229L335.161 117.652L336.515 134.86L336.494 134.862C336.804 138.798 335.495 142.481 333.129 145.251C330.763 148.021 327.331 149.89 323.394 150.2L323.396 150.221L305.556 151.625C305.441 152.449 305.144 153.246 304.68 153.95L293.804 162.695L294.14 166.958C297.332 166.876 300.528 166.984 303.749 167.282C312.518 168.085 321.363 170.269 330.309 173.875C332.332 174.69 333.307 176.986 332.492 179.009C331.677 181.032 329.382 182.007 327.358 181.192C319.133 177.868 311.022 175.859 303.043 175.131C300.27 174.884 297.509 174.783 294.77 174.829L295.364 182.376C295.563 184.912 293.673 187.126 291.136 187.326C288.6 187.525 286.386 185.635 286.186 183.098L285.594 175.573C283.541 175.861 281.495 176.245 279.456 176.702C275.211 177.661 270.954 179.012 266.716 180.733C262.427 182.49 258.196 184.57 254.025 187.006ZM253.301 75.9521L310.662 71.4378C312.567 71.2878 314.406 72.721 314.385 74.6182L313.159 119.585C313.107 121.484 311.873 123.16 309.978 123.309L262.322 127.059C260.427 127.208 258.916 125.76 258.598 123.879L250.121 79.676C249.804 77.8053 251.407 76.1012 253.301 75.9521ZM329.906 186.52C333.622 186.227 336.869 189 337.161 192.716C337.453 196.431 334.68 199.678 330.965 199.97C327.25 200.263 324.003 197.489 323.71 193.774C323.418 190.059 326.191 186.812 329.906 186.52ZM291.512 189.541C295.227 189.249 298.474 192.022 298.766 195.737C299.059 199.453 296.286 202.7 292.57 202.992C288.855 203.284 285.608 200.511 285.316 196.796C285.023 193.081 287.796 189.834 291.512 189.541ZM253.117 192.563C256.832 192.271 260.079 195.044 260.372 198.759C260.664 202.474 257.891 205.721 254.176 206.014C250.46 206.306 247.213 203.533 246.921 199.818C246.629 196.102 249.402 192.855 253.117 192.563Z" fill="#212529" />
+<path d="M214 149.357L358.304 138M226.248 202.488L222.017 148.726L350.287 138.631L354.518 192.393" stroke="#212529" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M453.077 21.4133L461.903 133.567M501.105 74.0573L413.875 80.9225M405.827 137.98L517.98 129.153M505.518 130.134L418.288 136.999L409.952 31.0766C409.822 29.4241 410.354 27.7877 411.43 26.5272C412.507 25.2668 414.04 24.4856 415.692 24.3555L490.461 18.4711C492.113 18.3411 493.75 18.8728 495.01 19.9493C496.271 21.0258 497.052 22.559 497.182 24.2115L505.518 130.134Z" stroke="#212529" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+<g clip-path="url(#clip1_6_2)">
+<mask id="mask0_6_2" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="30" y="126" width="101" height="101">
+<path d="M123.216 126.96L30.5022 134.257L37.7989 226.97L130.512 219.674L123.216 126.96Z" fill="white" />
+</mask>
+<g mask="url(#mask0_6_2)">
+<path d="M75.7171 177.342C75.1685 177.385 74.6172 177.31 74.0998 177.123C73.5824 176.936 73.1108 176.641 72.7164 176.257C72.3265 175.876 72.0213 175.418 71.8207 174.911C71.6201 174.404 71.5285 173.861 71.5521 173.317C72.1418 160.56 80.0008 135.959 105.613 133.943C106.555 133.861 107.496 134.126 108.256 134.689C109.016 135.253 109.544 136.074 109.74 137C111.471 146.402 109.443 156.108 104.094 164.031C98.0657 171.891 88.581 176.33 75.7171 177.342ZM102.489 142.157C86.1874 145.423 81.3203 161.12 79.8992 169.239C86.8764 168.457 93.2782 164.999 97.7587 159.593C101.274 154.504 102.944 148.365 102.492 142.196L102.489 142.157Z" fill="#212529" />
+<path d="M75.7171 177.342L75.2536 177.379C65.46 176.906 46.5207 170.856 44.964 151.077C44.8825 150.128 45.153 149.183 45.7239 148.421C46.2948 147.659 47.1262 147.134 48.0595 146.946C55.3514 145.632 62.8675 147.247 68.9754 151.442C72.1778 154.09 74.7599 157.409 76.5397 161.164C78.3195 164.92 79.2536 169.02 79.2761 173.175C79.3568 174.2 79.0271 175.215 78.3597 175.996C77.6922 176.778 76.7417 177.262 75.7171 177.342ZM53.3388 154.266C55.9744 164.048 65.1166 167.604 70.8549 168.902C70.1219 164.522 67.8205 160.558 64.38 157.75C61.1628 155.446 57.2958 154.226 53.3388 154.266Z" fill="#212529" />
+<path d="M76.9879 193.49C75.9634 193.571 74.9488 193.241 74.1673 192.574C73.3858 191.906 72.9015 190.956 72.8208 189.931L71.55 173.783C71.4694 172.759 71.799 171.744 72.4665 170.963C73.1339 170.181 74.0845 169.697 75.109 169.616C76.1336 169.536 77.1482 169.865 77.9297 170.533C78.7111 171.2 79.1955 172.151 79.2761 173.175L80.5439 189.284C80.5892 189.794 80.5329 190.309 80.3783 190.797C80.2237 191.285 79.9738 191.738 79.6431 192.129C79.3125 192.52 78.9076 192.842 78.4518 193.075C77.996 193.309 77.4985 193.45 76.9879 193.49Z" fill="#212529" />
+<path d="M89.2003 217.289L70.1941 218.785C66.0959 219.107 62.0374 217.789 58.9115 215.119C55.7856 212.449 53.8483 208.647 53.5257 204.549L52.5012 191.53C52.4205 190.506 52.7502 189.491 53.4177 188.71C54.0851 187.928 55.0357 187.444 56.0602 187.363L98.2447 184.043C99.2693 183.962 100.284 184.292 101.065 184.96C101.847 185.627 102.331 186.578 102.412 187.602L103.436 200.621C103.759 204.719 102.44 208.777 99.7705 211.903C97.1007 215.029 93.2985 216.966 89.2003 217.289ZM60.5313 194.785L61.2519 203.941C61.4131 205.99 62.3818 207.891 63.9447 209.226C65.5077 210.561 67.5369 211.22 69.586 211.059L88.5923 209.563C90.6413 209.402 92.5424 208.433 93.8773 206.87C95.2122 205.307 95.8716 203.278 95.7103 201.229L94.9898 192.073L60.5313 194.785Z" fill="#212529" />
+</g>
+</g>
+</g>
+</svg>
+<svg viewBox="0 0 681 254" fill="none" xmlns="http://www.w3.org/2000/svg" id="devide-block">
+<g clip-path="url(#clip0_1_2)">
+<rect x="-15.6259" y="224.94" width="733.822" height="88.4921" transform="rotate(-4.5 -15.6259 224.94)" fill="#212529" />
+</g>
+</svg>
+</div>
+<div id="mainsection">
+<div id="content">
+<h2 id="status"></h2>
+<div id="techcontainer">
+<h1>Who are you?</h1>
+<p>I am a beginner programmer with experience with 
+  Python and website development. As a code lover, I am always looking to improve my skills and take on new challenges in the programming world. My goal is to do
+  quality work and constantly develop as a programmer.</p>
+<br>
+<h1>And what are you doing now?</h1>
+<p>I have created several websites over the years, each with its own unique design and features. My passion for web development has allowed me to continuously improve my skills and stay up-to-date with the latest technologies.
+
+    I specialize in creating custom, user-friendly websites that are optimized for search engines. My attention to detail and focus on delivering a positive user experience have resulted in satisfied clients and successful projects.</p>
+<div id="serversrow">
+<div>
+<h2>FlipStore</h2>
+<p>I created my very first website on<b>November 27, 2022</b>. On the site, my friends and I were selling virtual game currencies. I'm proud to be a part of this exciting project and then we closed the site due to no one following the site..</p>
+</div>
+<div>
+<h2>Second Site</h2>
+<p>I created my second website in <b>early December 2022</b> and launched it, but I don't consider it a real website because it only consisted of a few dozen lines of code.</p>
+</div>
+<div>
+<h2>Site for selling NFT</h2>
+<p>
+    I haven't created my third site yet, but I'm looking forward to launching
+    it. This will be the most beautiful and largest website I have ever
+    created. It will be used to sell NFTs and I'm sure it will be a
+    great success.
+</p>
+</div>
+<p>
+    Phew, how many useless sites I have! If I had more, they would fall out of the room like a tetris game that went wrong.
+    But hey, it's always good to have backups, right?
+</p>
+<h1>What about the other stuff?</h1>
+<p>
+    Any other things? Depends what you mean by "other things". 
+    I'm so passionate about programming that I might as well be a robot 😄. But at least 
+    I'm using my time productively! So you could say I'm a SysAdmin 24
+</p>
+<br>
+<div id="qwiktech">
+<div>
+<i class="fab fa-python"></i>
+Python
+</div>
+<div>
+<i class="fab fa-js-square"></i>
+JavaScript
+</div>
+<div>
+<i class="fab fa-html5"></i>
+HTML
+</div>
+<div>
+<i class="fab fa-css3"></i>
+CSS
+</div>
+<div>
+<i class="fas fa-robot"></i>
+AI Prompting
+</div>
+</div>
+<h1>Can you find me</h1>
+<div class="col-md-6 footer-social">
+    <a href="t.me/Amrikhudo1"><i class="fab fa-telegram"></i></a>
+    <a href="https://vk.com/bugdiev"><i class="fab fa-vk"></i></a>
+    <a href="https://www.instagram.com/bugdiev_amrikhudo/?hl=ru"><i class="fab fa-instagram"></i></a>
+    <br>
+    <br>
+    &copy; 2023 Amrikhudo All rights reserved.<br>
+</body>
+</html>
